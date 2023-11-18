@@ -46,6 +46,3 @@ To run the backend services locally, follow these steps:
 
 If you would like to contribute to the project, please follow our [contribution guidelines](CONTRIBUTING.md).
 
-### License
-
-This project is licensed under the [MIT License](LICENSE).
