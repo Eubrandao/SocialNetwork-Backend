@@ -40,22 +40,22 @@ services:
 #       - .:/usr/src/users-service
 #     command: npm start # comando que ira executar assim que subir o container
 
-  zookeeper:
-    image: wurstmeister/zookeeper:latest
-    ports:
-      - "2181:2181"
-  kafka:
-    image: wurstmeister/kafka:2.11-1.1.1
-    ports:
-      - "9092:9092"
-    links:
-      - zookeeper
-    environment:
-      KAFKA_ADVERTISED_HOST_NAME: localhost
-      KAFKA_ADVERTISED_PORT: 9092
-      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
-      KAFKA_DELETE_TOPIC_ENABLE: "true"
-      KAFKA_CREATE_TOPICS: "signup:1:1,signin:1:1:compact"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+    zookeeper:
+      image: wurstmeister/zookeeper:latest
+      ports:
+        - "2181:2181"
+    kafka:
+      image: wurstmeister/kafka:2.11-1.1.1
+      ports:
+        - "9092:9092"
+      links:
+        - zookeeper
+      environment:
+        KAFKA_ADVERTISED_HOST_NAME: localhost
+        KAFKA_ADVERTISED_PORT: 9092
+        KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+        KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
+        KAFKA_DELETE_TOPIC_ENABLE: "true"
+        KAFKA_CREATE_TOPICS: "signup:1:1,signup.reply:1:1"
+      volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
