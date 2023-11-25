@@ -5,6 +5,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from '../model/user.model';
 import { ConfigModule } from '@nestjs/config';
+import { ProfileSchema } from '../model/profile.model';
 
 @Module({
   imports: [
@@ -28,7 +29,11 @@ import { ConfigModule } from '@nestjs/config';
     ]),
     MongooseModule.forRoot(process.env.CONNECTION_STRING),
     MongooseModule.forFeature([{
-      name: 'User', schema: UserSchema,
+      name: 'User', schema: UserSchema, collection: 'userInfoBasic', 
+    }]),
+
+    MongooseModule.forFeature([{
+      name: 'Profile', schema: ProfileSchema, collection: 'userInfoProfile', 
     }]),
   ],
   controllers: [AuthController],
