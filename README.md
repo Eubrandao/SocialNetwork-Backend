@@ -9,6 +9,7 @@ This repository contains the backend implementation for a simple social network 
 - [NestJS](https://nestjs.com/): A powerful Node.js framework for building server-side applications.
 - [Kafka](https://kafka.apache.org/): A distributed streaming platform for building real-time data pipelines and streaming applications.
 - [Docker](https://www.docker.com/): A platform for developing, shipping, and running applications in containers.
+- [Atlas MongoDB](https://www.mongodb.com/atlas/database): Multicloud Database
 
 ### Project Structure
 

@@ -1,17 +1,34 @@
-import { Injectable, Inject } from '@nestjs/common';
+import { Injectable} from '@nestjs/common';
 import { SignupDto } from 'apps/api-gateway/dto/signup.dto';
-import { ClientKafka } from '@nestjs/microservices';
+import { InjectModel } from '@nestjs/mongoose';
+import { User } from '../model/user.model';
+import { Model } from 'mongoose';
+import * as bcrypt from 'bcrypt';
+
 
 @Injectable()
 export class AuthService {
-  constructor(@Inject('AUTH_SERVICE') private readonly kafkaService: ClientKafka) {}
+    constructor(
+        @InjectModel('User')
+        private readonly userModel: Model<User>,
+      ) {}
 
-  async authenticate(signupDto: SignupDto): Promise<boolean> {
-    return true;
-  }
 
-  async sendAuthenticationResponse(response: string) {
-    // Enviar mensagem para o tópico 'signup-response'
-    await this.kafkaService.emit('signup.reply', response);
-  }
+ async signup(signupDto: SignupDto): Promise<string> {
+    const body = {
+      name: signupDto.name,
+      email: signupDto.email,
+      password: await this.encrypt(signupDto.password)
+    }
+    const result = await new this.userModel(body).save();
+    return result.id
+ }
+
+ async encrypt(signupDto){
+  const saltOrRounds = 10;
+  const password = signupDto
+  const hash = await bcrypt.hash(password, saltOrRounds);
+  return hash
+ }
+
 }

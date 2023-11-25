@@ -10,12 +10,7 @@ export class AuthController {
   @MessagePattern('signup') //topic;
   async handleSignup(signupDto: SignupDto) {
     console.log('Received signup message:', signupDto);
-    const authenticated = await this.usersService.authenticate(signupDto);
-    // Enviar resposta ao tópico 'signup-response'
-    if (authenticated) {
-      return this.usersService.sendAuthenticationResponse('autenticado');
-    } else {
-      return this.usersService.sendAuthenticationResponse('não autenticado');
-    }
-  }
+    return this.usersService.signup(signupDto);
+}
+
 }

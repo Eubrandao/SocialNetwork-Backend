@@ -8,9 +8,11 @@ import { ClientKafka } from '@nestjs/microservices';
 export class ApiGatewayService {
   constructor(@Inject('GATEWAY_SERVICE') private readonly kafkaService: ClientKafka) {}
 
+  
   async sendSignup(signupDto: SignupDto) {
     // Enviar mensagem para o tópico 'signup'
     console.log(signupDto)
     await this.kafkaService.emit('signup', signupDto);
+    return 'Cadastrado com Sucesso!'
   }
 }

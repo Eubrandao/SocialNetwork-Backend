@@ -2,9 +2,15 @@ import { Module } from '@nestjs/common';
 import { AuthController } from './users-service.controller';
 import { AuthService } from './users-service.service';
 import { ClientsModule, Transport } from '@nestjs/microservices';
+import { MongooseModule } from '@nestjs/mongoose';
+import { UserSchema } from '../model/user.model';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
+    ConfigModule.forRoot({
+      envFilePath: '.env',
+    }),
     ClientsModule.register([
       {
         name: 'AUTH_SERVICE',
@@ -20,6 +26,10 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         },
       },
     ]),
+    MongooseModule.forRoot(process.env.CONNECTION_STRING),
+    MongooseModule.forFeature([{
+      name: 'User', schema: UserSchema,
+    }]),
   ],
   controllers: [AuthController],
   providers: [AuthService],
