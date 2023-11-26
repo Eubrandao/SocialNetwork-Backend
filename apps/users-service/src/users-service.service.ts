@@ -5,6 +5,7 @@ import { User } from '../model/user.model';
 import { Profile } from '../model/profile.model';
 import { Model } from 'mongoose';
 import * as bcrypt from 'bcrypt';
+import { ProfileDto } from 'apps/api-gateway/dto/profile.dto';
 
 
 @Injectable()
@@ -35,7 +36,12 @@ export class AuthService {
     return result.id
  }
 
- async updateProfile(){}
+ async updateProfile(body){
+  // const result = await this.profileModel.findByIdAndUpdate({userID:  body.id.toString()}, {$push: body.profileDto})
+
+  // return result
+  
+ }
 
  async encrypt(signupDto){
   const saltOrRounds = 10;

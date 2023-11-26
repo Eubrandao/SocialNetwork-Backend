@@ -15,4 +15,11 @@ export class ApiGatewayService {
     await this.kafkaService.emit('signup', signupDto);
     return 'Cadastrado com Sucesso!'
   }
+
+  async sendUpdateProfile(body) {
+    // Enviar mensagem para o tópico 'profile'
+    console.log(body)
+    await this.kafkaService.emit('profile', body);
+    return 'Perfil Atualizado com sucesso!'
+  }
 }

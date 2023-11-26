@@ -6,7 +6,7 @@ export class NotificationServiceController {
   constructor(private readonly notificationServiceService: NotificationServiceService) {}
 
   @Get()
-  getHello(): string {
-    return this.notificationServiceService.getHello();
+  getHello(): Promise<void> {
+    return this.notificationServiceService.recoveryPassword();
   }
 }

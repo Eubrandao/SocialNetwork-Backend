@@ -10,7 +10,7 @@ export const ProfileSchema = new mongoose.Schema({
 });
 
 export interface Profile {
-  id: string;
+  userID: string;
   name: string;
   email: string;
   dateBirth: Date;
