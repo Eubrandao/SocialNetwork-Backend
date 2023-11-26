@@ -7,6 +7,6 @@ export class NotificationServiceController {
 
   @Get()
   getHello(): Promise<void> {
-    return this.notificationServiceService.recoveryPassword();
+    return this.notificationServiceService.sendWelcome(userInfo.email);
   }
 }
