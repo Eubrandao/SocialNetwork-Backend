@@ -19,7 +19,7 @@ import { ProfileSchema } from '../model/profile.model';
         options: {
           client: {
             clientId: 'AUTH',
-            brokers: ['localhost:9092'],
+            brokers: ['kafka:9092'],
           },
           consumer: {
             groupId: 'auth-consumer',

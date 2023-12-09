@@ -1,5 +1,5 @@
 FROM node:18
-LABEL key="api-gateway"
+LABEL key="users-service"
  
 WORKDIR /usr/src/app
  
@@ -13,7 +13,7 @@ RUN npm install
 
 COPY ./dist .
  
-ENV PORT 3001
+ENV PORT 3002
 EXPOSE $PORT
-CMD [ "npm", "start", "api-gateway" ]
+CMD [ "npm", "start", "users-service" ]
 

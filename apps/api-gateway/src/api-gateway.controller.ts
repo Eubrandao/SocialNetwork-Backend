@@ -1,7 +1,7 @@
 import { Body, Controller, Post, Param } from '@nestjs/common';
 import { ApiGatewayService } from './api-gateway.service';
 import { SignupDto } from '../dto/signup.dto';
-import { SigninDto } from '../dto/signin.dto';
+// import { SigninDto } from '../dto/signin.dto';
 import { ProfileDto } from '../dto/profile.dto';
 
 @Controller('/api')
@@ -22,8 +22,8 @@ export class ApiGatewayController {
     return this.apiGatewayService.sendUpdateProfile(body);
   }
 
-  @Post('/signin')
-  async signin(@Body() signinDto: SigninDto) {
-    return this.apiGatewayService.signin(signinDto);
-  }
+  // @Post('/signin')
+  // async signin(@Body() signinDto: SigninDto) {
+  //   return this.apiGatewayService.signin(signinDto);
+  // }
 }

@@ -16,29 +16,37 @@ services:
 #       - .:/usr/src/feed-service
 #     command: npm start # comando que ira executar assim que subir o container
 
-#   app3:
-#     build: ./notification-service/ # caminho para o Dockerfile
-#     ports:
-#       - "3003:3003" # porta que voce configurou no Dockerfile
-#     volumes:
-#       - .:/usr/src/notification-service
-#     command: npm start # comando que ira executar assim que subir o container
+    notification-service:
+      build:
+        context: ./
+        dockerfile: ./apps/notification-service/src/Dockerfile
+      ports:
+        - "3003:3003" # porta que voce configurou no Dockerfile
+      volumes:
+        -  ./:/usr/src/app
+        - /usr/src/app/node_modules                           
+      command: npm start notification-service # comando que ira executar assim que subir o container
 
-#   app4:
-#     build: ./api-gateway/ # caminho para o Dockerfile
-#     ports:
-#       - "3004:3004" # porta que voce configurou no Dockerfile
-#     volumes:
-#       - .:/usr/src/api-gateway
-#     command: npm start # comando que ira executar assim que subir o container
+    api-gateway:
+      build:
+        context: ./
+        dockerfile: ./apps/api-gateway/src/Dockerfile
+      ports:
+        - "3001:3001" # porta que voce configurou no Dockerfile
+      volumes:
+        -  ./:/usr/src/app
+      command: npm start api-gateway # comando que ira executar assim que subir o container
 
-#   app5:
-#     build: ./users-service/ # caminho para o Dockerfile
-#     ports:
-#       - "3005:3005" # porta que voce configurou no Dockerfile
-#     volumes:
-#       - .:/usr/src/users-service
-#     command: npm start # comando que ira executar assim que subir o container
+    users-service:
+      build:
+        context: ./
+        dockerfile: ./apps/users-service/src/Dockerfile
+      ports:
+        - "3002:3002" # porta que voce configurou no Dockerfile
+      volumes:
+        -  ./:/usr/src/app
+        - /usr/src/app/node_modules                           
+      command: npm start users-service # comando que ira executar assim que subir o container
 
     zookeeper:
       image: wurstmeister/zookeeper:latest
@@ -51,11 +59,11 @@ services:
       links:
         - zookeeper
       environment:
-        KAFKA_ADVERTISED_HOST_NAME: localhost
+        KAFKA_ADVERTISED_HOST_NAME: kafka
         KAFKA_ADVERTISED_PORT: 9092
         KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
         KAFKA_AUTO_CREATE_TOPICS_ENABLE: "true"
         KAFKA_DELETE_TOPIC_ENABLE: "true"
-        KAFKA_CREATE_TOPICS: "signup:1:1,profile:1:1,signup.reply:1:1"
+        KAFKA_CREATE_TOPICS: "signup:1:1,profile:1:1,notification:1:1,signup.reply:1:1"
       volumes:
         - /var/run/docker.sock:/var/run/docker.sock
