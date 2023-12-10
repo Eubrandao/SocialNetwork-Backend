@@ -8,8 +8,8 @@ export class NotificationServiceService {
     return 'Hello World!';
   }
 
-  async sendWelcome(){
-    await this.sendEmail('userInfo.email', process.env.TEMPLATE_WELCOME)
+  async sendWelcome(email){
+    await this.sendEmail(email, process.env.TEMPLATE_WELCOME)
 
   }
 

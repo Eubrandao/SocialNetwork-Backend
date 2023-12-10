@@ -10,5 +10,6 @@ export class NotificationServiceController {
   @MessagePattern('notification') //topic;
   async handleNotification(body){
     console.log("Notification Service - Received message for user service:" , body)
+    return this.notificationServiceService.sendWelcome(body.email)
   }
 }
